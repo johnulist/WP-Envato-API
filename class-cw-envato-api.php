@@ -410,9 +410,10 @@ final class cw_WP_EnvatoAPI {
 	 * @access public
 	 * @return void
 	 */
-	public function wp_list_themes($username, $purchase_code, $do_cache = true, $timeout = '' ){
+	public function wp_list_themes( $purchase_code, $do_cache = true, $timeout = '' ){
 		
-		
+		$wp_list = $this->private_user_data('wp-list-themes', $purchase_code , $do_cache , $timeout);
+
 	}
 
 	public function public_data($set, $set_data , $do_cache = false, $timeout = ''){
@@ -432,11 +433,11 @@ final class cw_WP_EnvatoAPI {
 		
 		$transient = $set .'_.'. $set_data;
 		
-		if($do_cache){
+		if( $do_cache ){
 		
 			$results = $this->set_cache( $transient, $url, $timeout );
 
-		}else{
+		} else {
 			
 			$results = $this->remote_request( $url );
 			
