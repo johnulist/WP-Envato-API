@@ -248,7 +248,14 @@ final class cw_WP_EnvatoAPI {
 			
 		}
 		
-		$url = 'http://marketplace.envato.com/api/edge/' . $this->username . '/' . $this->api_key . '/' . $set . ':' . $set_data . '.json';
+		if ( $set_data !== '' ) {
+		
+			$set_data = ":$set_data";
+		
+		}
+      
+		
+		$url = 'http://marketplace.envato.com/api/edge/' . $this->username . '/' . $this->api_key . '/' . $set . $set_data . '.json';
 		
 		$transient = $this->username . '_' . $set . $set_data;
 		
@@ -410,9 +417,9 @@ final class cw_WP_EnvatoAPI {
 	 * @access public
 	 * @return void
 	 */
-	public function wp_list_themes( $purchase_code, $do_cache = true, $timeout = '' ){
+	public function wp_list_themes( $do_cache = true, $timeout = '' ){
 		
-		$wp_list = $this->private_user_data('wp-list-themes', $purchase_code , $do_cache , $timeout);
+		$wp_list = $this->private_user_data('wp-list-themes', '' , $do_cache , $timeout);
 
 	}
 
